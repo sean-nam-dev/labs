@@ -4,16 +4,21 @@ plugins {
     alias(libs.plugins.kotlin.compose)
 
     alias(libs.plugins.kotlin.serialization)
+
+    id("com.google.devtools.ksp")
+
+//    id("org.jetbrains.kotlin.plugin.serialization")
+//    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
-    namespace = "dev.sn.littlelemonktor"
+    namespace = "dev.sn.littlelemondata"
     compileSdk {
         version = release(36)
     }
 
     defaultConfig {
-        applicationId = "dev.sn.littlelemonktor"
+        applicationId = "dev.sn.littlelemondata"
         minSdk = 24
         targetSdk = 36
         versionCode = 1
@@ -38,23 +43,42 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+//    kotlin {
+//        compilerOptions {
+//            jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11)
+//        }
+//    }
     buildFeatures {
         compose = true
     }
 }
 
 dependencies {
-    val ktor_version = "2.1.3"
 
+    val ktor_version = "2.1.3"
     implementation("io.ktor:ktor-client-core:${ktor_version}")
     implementation("io.ktor:ktor-client-android:${ktor_version}")
     implementation("io.ktor:ktor-client-content-negotiation:${ktor_version}")
     implementation("io.ktor:ktor-serialization-kotlinx-json:${ktor_version}")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
 
-//    implementation("io.ktor:ktor-client-okhttp:2.1.3")
-//    implementation("io.ktor:ktor-client-android:2.1.3")
-//    implementation("com.github.bumptech.glide:compose:1.0.0-beta01")
+    val room_version = "2.8.4"
+    implementation("androidx.room:room-runtime:${room_version}")
+    ksp("androidx.room:room-compiler:$room_version")
+    implementation("androidx.room:room-ktx:${room_version}")
+
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.10.0")
+
+//    implementation(libs.ktor.client.android)
+//    implementation("io.ktor:ktor-client-core:2.3.6")
+//
+//    implementation(libs.ktor.client.content.negotiation)
+//    implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.6")
+//
+//    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
+
+//    implementation(libs.ktor.serialization.kotlinx.json)
+//    implementation(libs.kotlinx.serialization.json)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

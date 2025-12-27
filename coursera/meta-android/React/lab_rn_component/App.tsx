@@ -1,17 +1,8 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
-import LittleLemonScaffold from "./component/LittleLemonScaffold.tsx";
+import {MainScreen} from "./component/MainScreen.tsx";
 
 function App() {
     return (
-        <>
-            <LittleLemonScaffold />
-        </>
+        <MainScreen />
     );
 }
 

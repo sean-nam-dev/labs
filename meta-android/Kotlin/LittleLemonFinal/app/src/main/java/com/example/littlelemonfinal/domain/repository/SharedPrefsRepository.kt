@@ -1,4 +1,4 @@
-package com.example.littlelemonfinal.domain
+package com.example.littlelemonfinal.domain.repository
 
 interface SharedPrefsRepository {
 

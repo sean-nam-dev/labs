@@ -1,4 +1,6 @@
-package com.example.littlelemonfinal.domain
+package com.example.littlelemonfinal.domain.usecase
+
+import com.example.littlelemonfinal.domain.repository.SharedPrefsRepository
 
 class WritePersonalInfoUsecase(
     private val sharedPrefsRepository: SharedPrefsRepository

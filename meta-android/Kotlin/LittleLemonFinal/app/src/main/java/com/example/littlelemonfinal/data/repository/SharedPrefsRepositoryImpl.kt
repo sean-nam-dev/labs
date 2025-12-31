@@ -1,8 +1,8 @@
-package com.example.littlelemonfinal.data
+package com.example.littlelemonfinal.data.repository
 
 import android.content.SharedPreferences
 import androidx.core.content.edit
-import com.example.littlelemonfinal.domain.SharedPrefsRepository
+import com.example.littlelemonfinal.domain.repository.SharedPrefsRepository
 
 class SharedPrefsRepositoryImpl(
     private val sharedPrefs: SharedPreferences

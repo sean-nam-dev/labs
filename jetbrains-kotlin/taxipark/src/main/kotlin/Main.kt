@@ -118,7 +118,7 @@ fun TaxiPark.findTheMostFrequentTripDurationPeriod(): IntRange? {
         }
 
 
-        result.maxBy { it.value }.key
+        result.maxBy { it.value }?.key
     }
 }
 

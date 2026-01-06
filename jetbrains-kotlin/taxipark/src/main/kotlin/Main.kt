@@ -16,3 +16,20 @@ fun TaxiPark.findFakeDrivers(): Set<Driver> {
 
     return this.allDrivers - activeDrivers
 }
+
+/*
+ * Task #2. Find all the clients who completed at least the given number of trips.
+ */
+fun TaxiPark.findFaithfulPassengers(minTrips: Int): Set<Passenger> {
+    if (minTrips == 0) return allPassengers
+
+    val passengerMap = mutableMapOf<Passenger, Int>()
+
+    this.trips.forEach { trip ->
+        trip.passengers.forEach { passenger ->
+            passengerMap[passenger] = passengerMap.getOrDefault(passenger, 0) + 1
+        }
+    }
+
+    return passengerMap.filter { it.value >= minTrips }.keys
+}

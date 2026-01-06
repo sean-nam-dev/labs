@@ -50,3 +50,29 @@ fun TaxiPark.findFrequentPassengers(driver: Driver): Set<Passenger> {
 
     return result.filter { it.value > 1 }.keys
 }
+
+/*
+ * Task #4. Find the passengers who had a discount for majority of their trips.
+ */
+fun TaxiPark.findSmartPassengers(): Set<Passenger> {
+    val temp = mutableMapOf<Passenger, List<Double?>>()
+
+    this.trips.forEach { trip ->
+        trip.passengers.forEach { passenger ->
+            temp[passenger] = temp.getOrDefault(passenger, emptyList()) + trip.discount
+        }
+    }
+
+    val result = mutableSetOf<Passenger>()
+
+    temp.forEach { entry ->
+        val nullCount = entry.value.count { it == null }
+        val doubleCount = entry.value.count { it != null }
+
+        if (doubleCount > nullCount) {
+            result += entry.key
+        }
+    }
+
+    return result
+}

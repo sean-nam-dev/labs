@@ -55,31 +55,29 @@ class Board(override val width: Int, ) : SquareBoard {
     }
 
     override fun getCellOrNull(i: Int, j: Int): Cell? {
-        return if (i in 1..width && j in 1..width) {
+        return try {
             getCell(i, j)
-        } else {
+        } catch (e: Exception) {
             null
         }
     }
 
     override fun getCell(i: Int, j: Int): Cell {
-        return array[i - 1][j - 1]
+        return if (i in 1..width && j in 1..width) array[i - 1][j - 1]
+        else throw IllegalArgumentException()
     }
 
-    override fun getAllCells(): Collection<Cell> = array.flatten()
+    override fun getAllCells(): Collection<Cell> = TODO()
 
     override fun getRow(i: Int, jRange: IntProgression): List<Cell> {
-        TODO("Not yet implemented")
+        return TODO()
     }
 
     override fun getColumn(iRange: IntProgression, j: Int): List<Cell> {
-        TODO("Not yet implemented")
+        return TODO()
     }
 
     override fun Cell.getNeighbour(direction: Direction): Cell? {
-        TODO("Not yet implemented")
+        return TODO()
     }
-
-    private fun checkBounds(i: Int, j: Int): Boolean =
-        i in 1..width && j in 1..width
 }

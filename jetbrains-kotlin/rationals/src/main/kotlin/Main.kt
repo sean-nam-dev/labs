@@ -58,4 +58,50 @@ data class Rational(
             denominator = den / finalGcd
         )
     }
+
+    infix operator fun times(other: Rational): Rational {
+        val numerator = numerator * other.numerator
+        val denominator = denominator * other.denominator
+
+        return normalize(
+            Rational(
+                numerator = numerator,
+                denominator = denominator
+            )
+        )
+    }
+
+    infix operator fun div(other: Rational): Rational {
+        return normalize(
+            Rational(
+                numerator = this.numerator * other.denominator,
+                denominator = this.denominator * other.numerator
+            )
+        )
+    }
+
+    operator fun unaryMinus(): Rational {
+        return normalize(
+            Rational(
+                numerator = -this.numerator,
+                denominator = this.denominator
+            )
+        )
+    }
+}
+
+private fun normalize(rational: Rational): Rational {
+    val gcd = rational.numerator.gcd(rational.denominator)
+
+    var (numerator, denominator) = rational.numerator / gcd to rational.denominator / gcd
+
+    if (denominator < BigInteger.ZERO) {
+        numerator *= (-1).toBigInteger()
+        denominator *= (-1).toBigInteger()
+    }
+
+    return Rational(
+        numerator = numerator,
+        denominator = denominator
+    )
 }

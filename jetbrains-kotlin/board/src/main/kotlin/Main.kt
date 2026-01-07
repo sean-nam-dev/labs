@@ -5,7 +5,7 @@ fun main() {
 }
 
 fun createSquareBoard(width: Int): SquareBoard = Board(width)
-fun <T> createGameBoard(width: Int): GameBoard<T> = TODO()
+fun <T> createGameBoard(width: Int): GameBoard<T> = Game(Board(width))
 
 data class Cell(val i: Int, val j: Int) {
     override fun toString()= "($i, $j)"
@@ -19,6 +19,34 @@ enum class Direction {
         DOWN -> UP
         RIGHT -> LEFT
         LEFT -> RIGHT
+    }
+}
+
+class Game<T>(
+    private val board: Board
+) : GameBoard<T>, SquareBoard by board {
+    private val cellMap = mutableMapOf<Cell, T?>()
+
+    override fun get(cell: Cell): T? = cellMap[cell]
+
+    override fun set(cell: Cell, value: T?) {
+        cellMap[cell] = value
+    }
+
+    override fun filter(predicate: (T?) -> Boolean): Collection<Cell> {
+        return TODO()
+    }
+
+    override fun find(predicate: (T?) -> Boolean): Cell? {
+        return TODO()
+    }
+
+    override fun any(predicate: (T?) -> Boolean): Boolean {
+        return TODO()
+    }
+
+    override fun all(predicate: (T?) -> Boolean): Boolean {
+        return TODO()
     }
 }
 
@@ -47,7 +75,7 @@ interface GameBoard<T> : SquareBoard {
     fun all(predicate: (T?) -> Boolean): Boolean
 }
 
-class Board(override val width: Int, ) : SquareBoard {
+class Board(override val width: Int) : SquareBoard {
     val array = Array(width) { i ->
         Array(width) { j ->
             Cell(i + 1, j + 1)
@@ -57,7 +85,7 @@ class Board(override val width: Int, ) : SquareBoard {
     override fun getCellOrNull(i: Int, j: Int): Cell? {
         return try {
             getCell(i, j)
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             null
         }
     }

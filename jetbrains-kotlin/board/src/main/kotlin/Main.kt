@@ -34,11 +34,20 @@ class Game<T>(
     }
 
     override fun filter(predicate: (T?) -> Boolean): Collection<Cell> {
-        return TODO()
+        val result = mutableListOf<Cell>()
+
+        cellMap.forEach { (cell, t) ->
+            if (predicate(t)) result += cell
+        }
+
+        return result
     }
 
     override fun find(predicate: (T?) -> Boolean): Cell? {
-        return TODO()
+        cellMap.forEach { (cell, t) ->
+            if (predicate(t)) return cell
+        }
+        return null
     }
 
     override fun any(predicate: (T?) -> Boolean): Boolean {

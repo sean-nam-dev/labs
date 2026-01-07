@@ -51,11 +51,19 @@ class Game<T>(
     }
 
     override fun any(predicate: (T?) -> Boolean): Boolean {
-        return TODO()
+        getAllCells().forEach { cell ->
+            if (predicate(cellMap[cell])) return true
+        }
+        return false
     }
 
     override fun all(predicate: (T?) -> Boolean): Boolean {
-        return TODO()
+        getAllCells().forEach { cell ->
+            if (!predicate(cellMap[cell])) {
+                return false
+            }
+        }
+        return true
     }
 }
 

@@ -15,6 +15,9 @@ enum class Direction {
     }
 }
 
+fun createSquareBoard(width: Int): SquareBoard = SquareBoardImpl(width)
+fun <T> createGameBoard(width: Int): GameBoard<T> = GameBoardImpl(width)
+
 interface SquareBoard {
     val width: Int
 
